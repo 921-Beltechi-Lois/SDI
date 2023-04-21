@@ -28,7 +28,7 @@ public class ControllerLuggage {
 
 
     //GETALL without people, only with PeopleID
-    @GetMapping("/luggages/page/{page}/size/{size}")
+    @GetMapping("/api/luggages/page/{page}/size/{size}")
     @CrossOrigin(origins = "*")
     List<LuggageDTOWithId> all(@PathVariable int page, @PathVariable int size) {
         PageRequest pr = PageRequest.of(page,size);
@@ -36,21 +36,21 @@ public class ControllerLuggage {
     }
 
     //GET BY ID, cu passengers
-    @GetMapping("/luggages/{id}")
+    @GetMapping("/api/luggages/{id}")
     @CrossOrigin(origins = "*")
     LuggageDTO one(@PathVariable Long id) {
         return ControllerLuggage.getByIdLuggage(id);
     }
 
 
-    @PostMapping("/luggages/people/{personID}")   // ADD existing PersonID to a new Luggage
+    @PostMapping("/api/luggages/people/{personID}")   // ADD existing PersonID to a new Luggage
     Luggage newLuggage(@Valid @RequestBody Luggage newLuggage,@PathVariable Long personID) {
 
         return ControllerLuggage.addNewLuggage(newLuggage,personID);
     }
 
 
-    @PutMapping("/luggages/{luggageID}/people/{personID}")     //UPDATE
+    @PutMapping("/api/luggages/{luggageID}/people/{personID}")     //UPDATE
     Luggage replaceLuggage(@Valid @RequestBody Luggage luggage, @PathVariable Long luggageID, @PathVariable Long personID)
     {
         return ControllerLuggage.updateLuggage(luggage,luggageID,personID);
@@ -58,7 +58,7 @@ public class ControllerLuggage {
 
 
     // Luggage ID 3 deleted;   Person -> delete this luggage here too (cascading will do this);
-    @DeleteMapping("/luggages/{luggageID}")  //DELETE
+    @DeleteMapping("/api/luggages/{luggageID}")  //DELETE
     void deleteLuggage(@PathVariable Long luggageID)
     {
         ControllerLuggage.deleteLuggage(luggageID);
@@ -78,7 +78,7 @@ public class ControllerLuggage {
         return errors;
     }
 
-    @GetMapping("/luggage/color/blue/people-count")
+    @GetMapping("/api/luggage/color/blue/people-count")
     public List<LuggagePersonDTO> getBlueLuggageCount() {
             return ControllerLuggage.getBlueLuggageCount();
     }

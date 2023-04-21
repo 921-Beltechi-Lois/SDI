@@ -24,7 +24,7 @@ class ControllerPerson {
 
 
     //GETALL without Tickets, with ID Passenger 1:1, No_Of_BusRoutesTaken for each Person
-    @GetMapping("/people")
+    @GetMapping("/api/people")
     @CrossOrigin(origins = "*")
     List<PersonDTOWith_noBusTaken> all() {
         return ControllerPerson.getAllPeople();
@@ -33,7 +33,7 @@ class ControllerPerson {
 
 
 
-    @GetMapping("/people/{id}")
+    @GetMapping("/api/people/{id}")
     @CrossOrigin(origins = "*")
     public PersonDTO_getById_LuggageBusRoutes one(@PathVariable Long id) {
 
@@ -42,7 +42,7 @@ class ControllerPerson {
 
 
     // A3 statistic
-    @GetMapping("/people/average-distance-of-bus-routes")
+    @GetMapping("/api/people/average-distance-of-bus-routes")
     @CrossOrigin(origins = "*")
     public List<PersonAverageDistanceDTO> getPeopleOrderedByAverageDistanceOfBusRoutes() {
         return ControllerPerson.getPeopleOrderedByAverageDistanceOfBusRoutes();
@@ -50,20 +50,20 @@ class ControllerPerson {
 
 
 
-    @PostMapping("/people")
+    @PostMapping("/api/people")
     public Person newPerson(@RequestBody Person newPerson) {
        return ControllerPerson.addPerson(newPerson);
     }
 
 
-    @PutMapping("/people/{personID}")     //UPDATE
+    @PutMapping("/api/people/{personID}")     //UPDATE
     Person replacePerson(@RequestBody Person person, @PathVariable Long personID)
     {
        return ControllerPerson.updatePerson(person,personID);
 
     }
 
-    @DeleteMapping("/people/{id}")  //DELETE
+    @DeleteMapping("/api/people/{id}")  //DELETE
     void deletePerson(@PathVariable Long id) {
         ControllerPerson.deletePerson(id);
     }

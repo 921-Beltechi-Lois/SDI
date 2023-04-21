@@ -17,14 +17,14 @@ class ControllerTicket {
     }
 
     //GETALL without people & busRoutes, only with ID Person,Route[ 1: Person&Route]
-    @GetMapping("/tickets")
+    @GetMapping("/api/tickets")
     @CrossOrigin(origins = "*")
     List<TicketDTOWithId> all() {
         return ControllerTicket.getAllTickets();
     }
 
     //GET BY ID, with People && BusRoutes
-    @GetMapping("/tickets/{id}")
+    @GetMapping("/api/tickets/{id}")
     @CrossOrigin(origins = "*")
     TicketDTO one(@PathVariable Long id) {
 
@@ -33,7 +33,7 @@ class ControllerTicket {
 
 
     // Add to a new ticket existing PersonID & BusRouteID
-    @PostMapping("/tickets/people/{personID}/busroutes/{busrouteID}")   // ADD
+    @PostMapping("/api/tickets/people/{personID}/busroutes/{busrouteID}")   // ADD
     Ticket newTicket(@RequestBody Ticket newTicket,@PathVariable Long personID,@PathVariable Long busrouteID)
     {
        return ControllerTicket.addTicket(newTicket,personID,busrouteID);
@@ -41,21 +41,21 @@ class ControllerTicket {
 
 
     // A4 requirement; Add to an existing [list of tickets] an existing busRoute
-    @PostMapping("/tickets/{busrouteID}")   // ADD
+    @PostMapping("/api/tickets/{busrouteID}")   // ADD
     List<Ticket> newTicketList(@RequestBody List<TicketDTOWithId> TicketList, @PathVariable Long busrouteID)
     {
         return ControllerTicket.addSingleTicket(TicketList,busrouteID);
     }
 
 
-    @PutMapping("/tickets/{id}")     //UPDATE
+    @PutMapping("/api/tickets/{id}")     //UPDATE
     Ticket replaceTicket(@RequestBody Ticket newTicket, @PathVariable Long id) {
 
        return ControllerTicket.updateTicket(newTicket,id);
     }
 
 
-    @DeleteMapping("/tickets/{id}")  //DELETE
+    @DeleteMapping("/api/tickets/{id}")  //DELETE
     void deleteTicket(@PathVariable Long id) {
 
         ControllerTicket.deleteTicket(id);
